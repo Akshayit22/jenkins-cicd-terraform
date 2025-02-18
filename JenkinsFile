@@ -27,7 +27,9 @@ pipeline {
 
         stage('Terraform Init') {
             when {
-                branch 'main'
+                expression {
+                    return env.BRANCH_NAME == 'main'
+                }
             }
             steps {
                 script {
@@ -39,7 +41,9 @@ pipeline {
 
         stage('Terraform Plan') {
             when {
-                branch 'main'
+                expression {
+                    return env.BRANCH_NAME == 'main'
+                }
             }
             steps {
                 script {
@@ -50,7 +54,9 @@ pipeline {
 
         stage('Approval') {
             when {
-                branch 'main'
+                expression {
+                    return env.BRANCH_NAME == 'main'
+                }
             }
             steps {
                 script {
@@ -63,7 +69,9 @@ pipeline {
 
         stage('Terraform Apply') {
             when {
-                branch 'main'
+                expression {
+                    return env.BRANCH_NAME == 'main'
+                }
             }
 
             steps {
