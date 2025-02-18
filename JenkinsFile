@@ -59,6 +59,13 @@ pipeline {
                 }
             }
         }
+        stage('Terraform destroy') {
+            steps {
+                script {
+                    sh 'terraform destory -auto-approve tfplan'
+                }
+            }
+        }
     }
 
     post {
