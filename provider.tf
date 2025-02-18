@@ -24,6 +24,13 @@ provider "aws" {
 
 resource "aws_iam_user" "demouser" {
   name = "sample-user-from-cicd"
+
+  tags = {
+    Environment = "CICD"
+    CreatedBy   = "Terraform"
+    Project     = "DevOps-Automation"
+    owner       = "Akshay"
+  }
 }
 
 resource "time_sleep" "wait_150_seconds" {
