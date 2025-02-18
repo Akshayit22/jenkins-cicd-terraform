@@ -11,21 +11,30 @@ pipeline {
             steps {
                 script {
                     checkout scm
-                    sh "echo 'Current branch: ' \$(git rev-parse --abbrev-ref HEAD)"
+                    sh """
+                        git fetch --all
+                        git checkout main
+                        echo 'Current branch: ' \$(git rev-parse --abbrev-ref HEAD)
+                    """
                 }
             }
         }
 
         stage('Terraform Init') {
+            when {
+                branch 'main'
+            }
             steps {
                 script {
                     sh "terraform init"
-                    sh "terraform init -reconfigure"
                 }
             }
         }
 
         stage('Terraform Plan') {
+            when {
+                branch 'main'
+            }
             steps {
                 script {
                     sh "terraform plan -out=tfplan"
@@ -34,7 +43,9 @@ pipeline {
         }
 
         stage('Approval') {
-            
+            when {
+                branch 'main'
+            }
             steps {
                 script {
                     timeout(time: 1, unit: 'MINUTES') {
@@ -45,6 +56,9 @@ pipeline {
         }
 
         stage('Terraform Apply') {
+            when {
+                branch 'main'
+            }
             
             steps {
                 script {
