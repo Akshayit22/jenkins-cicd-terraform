@@ -28,8 +28,8 @@ resource "aws_iam_user" "demouser" {
   tags = {
     Environment = "CICD"
     CreatedBy   = "Terraform"
-    Project     = "DevOps-Automation"
-    owner       = "Akshay"
+    Project     = "DevOps-Automation-pipeline"
+    owner       = "AkshayT"
   }
 }
 
