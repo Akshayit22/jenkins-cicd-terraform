@@ -26,11 +26,6 @@ pipeline {
         }
 
         stage('Terraform Init') {
-            when {
-                expression {
-                    return env.BRANCH_NAME == 'main'
-                }
-            }
             steps {
                 script {
                     sh 'terraform init'
@@ -40,11 +35,6 @@ pipeline {
         }
 
         stage('Terraform Plan') {
-            when {
-                expression {
-                    return env.BRANCH_NAME == 'main'
-                }
-            }
             steps {
                 script {
                     sh 'terraform plan -out=tfplan'
@@ -53,11 +43,6 @@ pipeline {
         }
 
         stage('Approval') {
-            when {
-                expression {
-                    return env.BRANCH_NAME == 'main'
-                }
-            }
             steps {
                 script {
                     timeout(time: 1, unit: 'MINUTES') {
@@ -68,12 +53,6 @@ pipeline {
         }
 
         stage('Terraform Apply') {
-            when {
-                expression {
-                    return env.BRANCH_NAME == 'main'
-                }
-            }
-
             steps {
                 script {
                     sh 'terraform apply -auto-approve tfplan'
