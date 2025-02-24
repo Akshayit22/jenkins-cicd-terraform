@@ -34,5 +34,5 @@ resource "aws_iam_user" "demouser" {
 }
 
 resource "time_sleep" "wait_150_seconds" {
-  create_duration = "151s"
+  create_duration = "20s"
 }
