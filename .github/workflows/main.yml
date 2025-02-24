@@ -10,7 +10,7 @@ on:
 
 jobs:
   terraform:
-    runs-on: self-hosted
+    runs-on: [self-hosted, ak-tf-runner]
     name: Terraform Deployment on EC2
     environment: default  # Ensures environment-specific variables can be used
 
